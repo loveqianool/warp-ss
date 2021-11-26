@@ -5,4 +5,4 @@ RUN sed -i "s:sysctl -q net.ipv4.conf.all.src_valid_mark=1:echo Skipping setting
 ##RUN tar xf shadowsocks-v1.11.1.aarch64-unknown-linux-musl.tar.xz
 ##CMD ["sh","-c","z.sh"]
 
-CMD ["wg","up","wg0"]
+CMD ["wg-quick","up","wg0"]
