@@ -11,5 +11,5 @@ docker run -dit --name wireguard --network=z6 --restart=unless-stopped -e TZ="$(
 --sysctl="net.ipv4.conf.all.src_valid_mark=1" \
 --sysctl="net.ipv4.ip_forward=1" \
 --sysctl="net.ipv4.conf.all.proxy_arp=1" \
-alpine:edge
+loveqianool/warp
 ```
