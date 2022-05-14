@@ -24,6 +24,7 @@ if [ "$ARCH" == "aarch64" ]; then ARCH=arm64; else ARCH=amd64; fi && \
 v2p=https://github.com/zhfreal/v2ray-plugin/releases/download/$(curl -s "https://api.github.com/repos/zhfreal/v2ray-plugin/releases" | grep -m 1 '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')/v2ray-plugin_linux_$ARCH.zip && \
 curl -sL $v2p -o /tmp/v2p.zip && \
 unzip /tmp/v2p.zip -d /usr/local/bin/ && \
+mv /usr/local/bin/v2ray-plugin_linux_* /usr/local/bin/v2ray-plugin && \
 rm /tmp/v2p.zip
 
 COPY z.sh /z.sh
