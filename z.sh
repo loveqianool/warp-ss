@@ -2,7 +2,7 @@
 
 wg-quick up wg0
 
-sleep 6
+sleep 3
 
 if [ ! -f "/etc/shadowsocks-rust/config.json" ]; then
  echo ss 配置文件不存在
