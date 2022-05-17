@@ -1,8 +1,12 @@
 #!/bin/sh -ex
 
+if [ ! -f "/etc/wireguard/wg0.conf" ]; then
+ echo warp 配置文件不存在
+else
+ echo 启动warp
 wg-quick up wg0
-
 sleep 3
+fi
 
 if [ ! -f "/etc/shadowsocks-rust/config.json" ]; then
  echo ss 配置文件不存在
