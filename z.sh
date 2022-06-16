@@ -22,4 +22,11 @@ else
 v2ray run -c /etc/v2ray/config.json &
 fi
 
+if [ ! -f "/etc/xray/config.json" ]; then
+ echo xray 配置文件不存在
+else
+ echo 启动xray
+xray run -c /etc/xray/config.json &
+fi
+
 sleep infinity & wait
