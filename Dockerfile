@@ -12,11 +12,17 @@ curl -sL $ss -o - | tar -Jxv -C /usr/local/bin
 RUN ARCH=$(arch) && \
 if [ "$ARCH" == "aarch64" ]; then ARCH=arm64-v8a; else ARCH=64; fi && \
 v2=https://github.com/v2fly/v2ray-core/releases/download/$(curl -s "https://api.github.com/repos/v2fly/v2ray-core/releases" | grep -m 1 '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')/v2ray-linux-$ARCH.zip && \
+xr=https://github.com/XTLS/Xray-core/releases/download/$(curl -s "https://api.github.com/repos/XTLS/Xray-core/releases" | grep -m 1 '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')/Xray-linux-$ARCH.zip && \
 curl -sL $v2 -o /tmp/v2.zip && \
+curl -sL $xr -o /tmp/xr.zip && \
 unzip /tmp/v2.zip v2ray -d /usr/local/bin/ && \
+unzip /tmp/xr.zip xray -d /usr/local/bin/ && \
 mkdir /usr/local/share/v2ray && \
+mkdir /usr/local/share/xray && \
 curl -sL https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geoip.dat -o /usr/local/share/v2ray/geoip.dat && \
 curl -sL https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geosite.dat -o /usr/local/share/v2ray/geosite.dat && \
+ln -s /usr/local/share/v2ray/geoip.dat /usr/local/share/xray && \
+ln -s /usr/local/share/v2ray/geosite.dat /usr/local/share/xray && \
 rm /tmp/v2.zip
 
 RUN ARCH=$(arch) && \
