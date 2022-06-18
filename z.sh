@@ -1,9 +1,10 @@
 #!/bin/sh -ex
+stty -echo
 
 if [ ! -f "/etc/wireguard/wg0.conf" ]; then
  echo warp 配置文件不存在
 else
- echo 启动warp
+ echo 启动 warp
 wg-quick up wg0
 sleep 3
 fi
@@ -11,7 +12,7 @@ fi
 if [ ! -f "/etc/shadowsocks-rust/config.json" ]; then
  echo ss 配置文件不存在
 else
- echo 启动ss
+ echo 启动 ss
 ssserver -c /etc/shadowsocks-rust/config.json &
 fi
 
@@ -25,7 +26,7 @@ fi
 if [ ! -f "/etc/xray/config.json" ]; then
  echo xray 配置文件不存在
 else
- echo 启动xray
+ echo 启动 xray
 xray run -c /etc/xray/config.json &
 fi
 
