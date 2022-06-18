@@ -1,5 +1,4 @@
 #!/bin/sh -ex
-stty -echo
 
 if [ ! -f "/etc/wireguard/wg0.conf" ]; then
  echo warp 配置文件不存在
