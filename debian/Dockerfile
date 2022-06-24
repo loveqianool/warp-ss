@@ -9,8 +9,6 @@ wireguard curl tzdata unzip xz-utils iproute2 openresolv \
 
 RUN ln -s /usr/bin/resolvectl /usr/local/bin/resolvconf
 
-RUN sed -e "s/^#precedence ::ffff:0:0\/96\s\s100\$/precedence ::ffff:0:0\/96 100/g" -i /etc/gai.conf
-
 RUN sed -i "s:sysctl -q net.ipv4.conf.all.src_valid_mark=1:echo Skipping setting net.ipv4.conf.all.src_valid_mark:" /usr/bin/wg-quick \
  && curl https://developers.cloudflare.com/cloudflare-one/static/documentation/connections/Cloudflare_CA.pem \
  -o /usr/local/share/ca-certificates/Cloudflare_CA.pem \
