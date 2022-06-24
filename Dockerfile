@@ -16,13 +16,13 @@ RUN sed -i "s:sysctl -q net.ipv4.conf.all.src_valid_mark=1:echo Skipping setting
 RUN ss=https://github.com/shadowsocks/shadowsocks-rust/releases/download/$(curl -s "https://api.github.com/repos/shadowsocks/shadowsocks-rust/releases" | grep -m 1 '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')/shadowsocks-$(curl -s "https://api.github.com/repos/shadowsocks/shadowsocks-rust/releases" | grep -m 1 '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/').$(arch)-unknown-linux-musl.tar.xz && \
 curl -sL $ss -o - | tar -Jxv -C /usr/local/bin \
 && ARCH=$(arch) && \
-if [ "$ARCH" == "aarch64" ]; then ARCH=arm64; else ARCH=amd64; fi && \
+if [ "$ARCH" = "aarch64" ]; then ARCH=arm64; else ARCH=amd64; fi && \
 v2p=https://github.com/teddysun/v2ray-plugin/releases/download/$(curl -s "https://api.github.com/repos/teddysun/v2ray-plugin/releases" | grep -m 1 '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')/v2ray-plugin-linux-$ARCH-$(curl -s "https://api.github.com/repos/teddysun/v2ray-plugin/releases" | grep -m 1 '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/').tar.gz && \
 curl -sL $v2p -o - | tar -zxv -C /usr/local/bin && \
 mv /usr/local/bin/v2ray-plugin_* /usr/local/bin/v2ray-plugin
 
 RUN ARCH=$(arch) && \
-if [ "$ARCH" == "aarch64" ]; then ARCH=arm64-v8a; else ARCH=64; fi && \
+if [ "$ARCH" = "aarch64" ]; then ARCH=arm64-v8a; else ARCH=64; fi && \
 v2=https://github.com/v2fly/v2ray-core/releases/download/$(curl -s "https://api.github.com/repos/v2fly/v2ray-core/releases" | grep -m 1 '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')/v2ray-linux-$ARCH.zip && \
 xr=https://github.com/XTLS/Xray-core/releases/download/$(curl -s "https://api.github.com/repos/XTLS/Xray-core/releases" | grep -m 1 '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')/Xray-linux-$ARCH.zip && \
 curl -sL $v2 -o /tmp/v2.zip && \
