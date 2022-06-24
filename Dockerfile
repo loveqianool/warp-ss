@@ -2,9 +2,9 @@
 #RUN apk add -U wireguard-tools curl tzdata && rm -rf /var/cache/apk/*
 FROM debian:testing-slim
 
-RUN apt-get update && apt-get install -y \
+RUN apt update && apt install -y \
 wireguard curl tzdata unzip xz-utils \
-&& apt-get clean \
+&& apt clean \
 && rm -rf /var/lib/apt/lists/*
 
 RUN sed -e "s/^#precedence ::ffff:0:0\/96\s\s100\$/precedence ::ffff:0:0\/96 100/g" -i /etc/gai.conf \
