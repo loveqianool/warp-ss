@@ -1,4 +1,4 @@
-#!/bin/sh -ex
+#!/bin/sh
 
 if [ ! -n "$ipv4" ]; then
 sed -e "s/^#precedence ::ffff:0:0\/96\s\s100\$/precedence ::ffff:0:0\/96 100/g" -i /etc/gai.conf
