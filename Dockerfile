@@ -1,5 +1,11 @@
-FROM alpine:edge
-RUN apk add -U wireguard-tools curl tzdata && rm -rf /var/cache/apk/*
+#FROM alpine:edge
+#RUN apk add -U wireguard-tools curl tzdata && rm -rf /var/cache/apk/*
+FROM debian:testing-slim
+
+RUN apt update && apt install -y \
+wireguard curl tzdata unzip xz-utils iproute2 openresolv \
+&& apt clean \
+&& rm -rf /var/lib/apt/lists/*
 
 RUN sed -i "s:sysctl -q net.ipv4.conf.all.src_valid_mark=1:echo Skipping setting net.ipv4.conf.all.src_valid_mark:" /usr/bin/wg-quick \
  && curl https://developers.cloudflare.com/cloudflare-one/static/documentation/connections/Cloudflare_CA.pem \
