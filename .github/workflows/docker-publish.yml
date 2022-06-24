@@ -36,11 +36,3 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
           tags: loveqianool/warp:latest
-      -
-        name: Build and push
-        uses: docker/build-push-action@master
-        with:
-          context: ./debian
-          platforms: linux/amd64,linux/arm64
-          push: true
-          tags: loveqianool/warp:debian
