@@ -1,11 +1,13 @@
 #FROM alpine:edge
 #RUN apk add -U wireguard-tools curl tzdata && rm -rf /var/cache/apk/*
-FROM debian:testing
+FROM debian:testing-slim
 
 RUN apt update && apt install -y \
-wireguard curl tzdata unzip xz-utils \
+wireguard curl tzdata unzip xz-utils iproute2 \
 && apt clean \
 && rm -rf /var/lib/apt/lists/*
+
+RUN ln -s /usr/bin/resolvectl /usr/local/bin/resolvconf
 
 RUN sed -e "s/^#precedence ::ffff:0:0\/96\s\s100\$/precedence ::ffff:0:0\/96 100/g" -i /etc/gai.conf
 
