@@ -1,6 +1,6 @@
 #FROM alpine:edge
 #RUN apk add -U wireguard-tools curl tzdata && rm -rf /var/cache/apk/*
-FROM debian:testing-slim
+FROM debian:testing
 
 RUN apt update && apt install -y \
 wireguard curl tzdata unzip xz-utils \
