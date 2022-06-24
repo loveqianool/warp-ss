@@ -7,8 +7,6 @@ wireguard curl tzdata unzip xz-utils iproute2 openresolv \
 && apt clean \
 && rm -rf /var/lib/apt/lists/*
 
-RUN ln -s /usr/bin/resolvectl /usr/local/bin/resolvconf
-
 RUN sed -i "s:sysctl -q net.ipv4.conf.all.src_valid_mark=1:echo Skipping setting net.ipv4.conf.all.src_valid_mark:" /usr/bin/wg-quick \
  && curl https://developers.cloudflare.com/cloudflare-one/static/documentation/connections/Cloudflare_CA.pem \
  -o /usr/local/share/ca-certificates/Cloudflare_CA.pem \
