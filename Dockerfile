@@ -3,7 +3,7 @@
 FROM debian:testing-slim
 
 RUN apt update && apt install -y \
-wireguard curl tzdata unzip xz-utils iproute2 openresolv \
+wireguard curl tzdata unzip xz-utils iproute2 openresolv iputils-ping dnsutils \
 && apt clean \
 && rm -rf /var/lib/apt/lists/*
 
