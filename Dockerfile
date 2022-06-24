@@ -1,9 +1,17 @@
-FROM alpine:edge
-RUN apk add -U wireguard-tools curl tzdata && rm -rf /var/cache/apk/*
-RUN sed -i "s:sysctl -q net.ipv4.conf.all.src_valid_mark=1:echo Skipping setting net.ipv4.conf.all.src_valid_mark:" /usr/bin/wg-quick
+#FROM alpine:edge
+#RUN apk add -U wireguard-tools curl tzdata && rm -rf /var/cache/apk/*
+FROM debian:testing-slim
 
-RUN curl https://developers.cloudflare.com/cloudflare-one/static/documentation/connections/Cloudflare_CA.pem \
+RUN apt-get update && apt-get install -y \
+wireguard curl tzdata \
+&& apt-get clean \
+&& rm -rf /var/lib/apt/lists/*
+
+RUN sed -e "s/^#precedence ::ffff:0:0\/96\s\s100\$/precedence ::ffff:0:0\/96 100/g" -i /etc/gai.conf \
+ && sed -i "s:sysctl -q net.ipv4.conf.all.src_valid_mark=1:echo Skipping setting net.ipv4.conf.all.src_valid_mark:" /usr/bin/wg-quick \
+ && curl https://developers.cloudflare.com/cloudflare-one/static/documentation/connections/Cloudflare_CA.pem \
  -o /usr/local/share/ca-certificates/Cloudflare_CA.pem \
+ && chmod 644 /usr/local/share/ca-certificates/Cloudflare_CA.pem \
  && update-ca-certificates
 
 RUN ss=https://github.com/shadowsocks/shadowsocks-rust/releases/download/$(curl -s "https://api.github.com/repos/shadowsocks/shadowsocks-rust/releases" | grep -m 1 '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')/shadowsocks-$(curl -s "https://api.github.com/repos/shadowsocks/shadowsocks-rust/releases" | grep -m 1 '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/').$(arch)-unknown-linux-musl.tar.xz && \
