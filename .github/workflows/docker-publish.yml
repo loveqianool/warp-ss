@@ -32,7 +32,7 @@ jobs:
         name: Build and push
         uses: docker/build-push-action@v2
         with:
-          context: ./Dockerfile.alpine
+          context: /Dockerfile.alpine
           platforms: linux/amd64,linux/arm64
           push: true
           tags: loveqianool/warp:latest
@@ -40,7 +40,7 @@ jobs:
         name: Build and push
         uses: docker/build-push-action@v2
         with:
-          context: ./Dockerfile.debian
+          context: /Dockerfile.debian
           platforms: linux/amd64,linux/arm64
           push: true
           tags: loveqianool/warp:debian
