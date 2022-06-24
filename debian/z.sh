@@ -1,5 +1,12 @@
 #!/bin/sh -ex
 
+if [ ! -n "$ipv4" ]; then
+sed -e "s/^#precedence ::ffff:0:0\/96\s\s100\$/precedence ::ffff:0:0\/96 100/g" -i /etc/gai.conf
+echo ipv4 优先
+else
+echo ipv6 优先
+fi
+
 if [ ! -f "/etc/wireguard/wg0.conf" ]; then
  echo warp 配置文件不存在
 else
