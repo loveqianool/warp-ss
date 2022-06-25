@@ -11,6 +11,7 @@ if [ ! -f "/etc/wireguard/wg0.conf" ]; then
  echo warp 配置文件不存在
 else
  echo 启动 warp
+chmod 600 /etc/wireguard/*.conf
 wg-quick up wg0
 sleep 3
 fi
