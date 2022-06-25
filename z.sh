@@ -1,10 +1,10 @@
 #!/bin/sh
 
-if [ ! -n "$ipv4" ]; then
+if [ "$ipv6" = "yes" ]; then
+echo ipv6 优先
+else
 sed -e "s/^#precedence ::ffff:0:0\/96\s\s100\$/precedence ::ffff:0:0\/96 100/g" -i /etc/gai.conf
 echo ipv4 优先
-else
-echo ipv6 优先
 fi
 
 if [ ! -f "/etc/wireguard/wg0.conf" ]; then
