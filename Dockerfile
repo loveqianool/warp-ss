@@ -2,8 +2,8 @@
 #RUN apk add -U wireguard-tools curl tzdata && rm -rf /var/cache/apk/*
 FROM debian:testing-slim
 
-RUN apt update && apt install -y \
-wireguard curl tzdata unzip xz-utils iproute2 openresolv iputils-ping dnsutils \
+RUN apt update && apt install --no-install-recommends -y \
+wireguard-tools curl tzdata unzip xz-utils iproute2 openresolv iputils-ping dnsutils nftables ca-certificates \
 && apt clean \
 && rm -rf /var/lib/apt/lists/*
 
