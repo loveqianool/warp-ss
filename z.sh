@@ -12,7 +12,9 @@ if [ ! -f "/etc/wireguard/wg0.conf" ]; then
 else
  echo 启动 warp
 chmod 600 /etc/wireguard/*.conf
-wg-quick up wg0
+for i in /opt/docker/wireguard/*.conf; do
+  wg-quick up $i
+done
 sleep 3
 fi
 
