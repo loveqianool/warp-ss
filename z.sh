@@ -27,9 +27,14 @@ fi
 
 if [ ! -f "/etc/v2ray/config.json" ]; then
  echo v2 配置文件不存在
+elif [ "$s" ]; then
+ echo 启动sv
+sv2ray run -c /etc/v2ray/config.json &
 else
  echo 启动v2
 v2ray run -c /etc/v2ray/config.json &
+fi
+
 fi
 
 if [ ! -f "/etc/xray/config.json" ]; then
